@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed' });
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 
   try {
@@ -17,9 +17,9 @@ export default async function handler(req, res) {
       }
     );
 
-    res.status(response.status).json(response.data);
+    res.status(200).json(response.data);
   } catch (error) {
-    console.error('Error forwarding request to Mindpal:', error.message);
-    res.status(500).json({ error: 'Failed to reach Mindpal API.' });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to reach Mindpal API' });
   }
 }
